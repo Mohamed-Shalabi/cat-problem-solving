@@ -16,4 +16,4 @@ def xor_engine():
                     xor_even_ones_results.append(xor_result)
                 if binary_xor_result.count('1') % 2 == 1:
                     xor_odd_ones_results.append(xor_result)
-            print(len(xor_even_ones_results), ' ', len(xor_odd_ones_results))
+            print(len(xor_even_ones_results), len(xor_odd_ones_results))
