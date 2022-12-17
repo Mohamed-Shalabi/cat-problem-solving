@@ -1,19 +1,30 @@
+import sys
+
+
 def xor_engine():
-    t = int(input())
-    for i in range(t):
-        n_q = input().split(' ')
-        q = int(n_q[1])
-        string_numbers = input().split(' ')
-        numbers = map(lambda element: int(element), string_numbers)
-        for j in range(q):
-            xor_even_ones_results = []
-            xor_odd_ones_results = []
-            p = int(input())
-            for k in numbers:
-                xor_result = p ^ k
-                binary_xor_result = bin(xor_result).replace('0b', '')
-                if binary_xor_result.count('1') % 2 == 0:
-                    xor_even_ones_results.append(xor_result)
-                if binary_xor_result.count('1') % 2 == 1:
-                    xor_odd_ones_results.append(xor_result)
-            print(len(xor_even_ones_results), len(xor_odd_ones_results))
+    t = int(sys.stdin.readline().strip())
+    for _ in range(t):
+        n, q = map(int, sys.stdin.readline().strip().split())
+        numbers = list(map(int, sys.stdin.readline().strip().split()))
+        numbers_even_ones_count, numbers_odd_ones_count = 0, 0
+
+        for number in numbers:
+            if bin(number).count('1') % 2 == 0:
+                numbers_even_ones_count += 1
+
+        numbers_odd_ones_count = n - numbers_even_ones_count
+
+        for ___ in range(q):
+            p = int(sys.stdin.readline().strip())
+            if numbers_odd_ones_count == numbers_even_ones_count:
+                sys.stdout.write(f'{numbers_even_ones_count} {numbers_odd_ones_count}\n')
+                continue
+
+            are_p_ones_even = bin(p).count('1') % 2 == 0
+            if are_p_ones_even:
+                sys.stdout.write(f'{numbers_even_ones_count} {numbers_odd_ones_count}\n')
+            else:
+                sys.stdout.write(f'{numbers_odd_ones_count} {numbers_even_ones_count}\n')
+
+
+xor_engine()
